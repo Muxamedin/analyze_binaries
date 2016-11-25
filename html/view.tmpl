@@ -1,0 +1,73 @@
+<html>
+<head>
+    <title><?tcl ::info::title ?></title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<h1><?tcl ::info::caption ?></h1>
+
+<main>
+  <input id="tab1" type="radio" name="tabs" checked>
+  <label for="tab1">Summary</label>
+  <input id="tab2" type="radio" name="tabs">
+  <label for="tab2">Binaries</label>
+  <input id="tab3" type="radio" name="tabs">
+  <label for="tab3">Libraries</label>
+  <input id="tab4" type="radio" name="tabs">
+  <label for="tab4">Dependencies</label>
+  <input id="tab5" type="radio" name="tabs">
+  <label for="tab5">Stat information</label>
+  <input id="tab6" type="radio" name="tabs">
+  <label for="tab6">All files</label>
+  <section id="content1">
+    <p>
+		text description:
+		<?tcl tcl ::info::render description ?>
+    </p>
+    <p>
+        <?tcl ::info::render summary args?>
+    </p>
+  </section>
+  <section id="content2">
+    <p>
+        <?tcl ::info::render binaries args?>
+    </p>
+  </section>
+    
+  <section id="content3">
+    <p>
+	   <?tcl tcl ::info::render libraries_description ?>
+    </p>
+    <p>
+       <?tcl ::info::render libraries args?>
+    </p>
+  </section>
+    
+  <section id="content4">
+    <p>
+      <?tcl tcl ::info::render dependencies_description ?>
+    </p>
+    <p>
+      <?tcl tcl ::info::render dependencies args ?>
+    </p>
+  </section>
+  <section id="content5">
+    <p>
+      <?tcl tcl ::info::render stat_description ?>
+    </p>
+    <p>
+      <?tcl tcl ::info::render stat arg ?>
+    </p>
+  </section>
+   <section id="content6">
+    <p>
+      <?tcl tcl ::info::render all_description?>
+    </p>
+    <p>
+      <?tcl tcl ::info::render all arg?>
+    </p>
+  </section> 
+</main>
+</body>>
+</html>
+
