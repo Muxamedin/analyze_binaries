@@ -142,8 +142,7 @@ input:checked + label {
   text-align: center;
   width: 150px;
 }
- 
- 
+  
 .features-table td.grey
 {
   background: #efefef;
@@ -156,7 +155,12 @@ input:checked + label {
   background: #e7f3d4;
   background: rgba(184,243,85,0.3);
 }
- 
+
+.features-table td.red
+{
+  background: #FF6347;
+}
+
 .features-table td:nowrap
 {
   white-space: nowrap;
