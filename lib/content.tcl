@@ -1,6 +1,4 @@
 namespace eval ::data {}
-
-
 proc ::data::caption {} {
     set currentTime [clock format [clock seconds] -format "%dT%H:%M:%S"]
     set caption "File analyze REPORT generated from $currentTime"
@@ -8,17 +6,39 @@ proc ::data::caption {} {
     return $caption
 }
 
-proc ::data::tableCreater {table_name args_lst } {
-    table_name
-    
-    return table    
-}
-
 proc ::data::isEmptyString {str} {
     set str [string trim $str]
     expr {![binary scan $str c c]}
 }
-#puts [isEmptyString "  f"]
+
+proc ::data::tableCreater {lstName cntInTable} {
+    upvar #0 $lstName refTolstName
+    set cnt 0
+    set txtBodyTable {}
+    #append txtBodyTable
+    set lstLentgth [llength $refTolstName]
+    foreach item $refTolstName {
+        #incr cnt
+        if { ($cnt % $cntInTable) == 0 } {
+            # devide list on cntInTable  items
+            switch -- $cnt {
+                0 {
+                    append txtBodyTable "\n <tr> \n <td>$item</td>\n"
+                }
+                $lstLentgth {
+                    append txtBodyTable "</tr>\n"
+                }
+                default {
+                    append txtBodyTable "</tr> \n <tr> \n <td>$item</td>\n"
+                }
+            }
+        } else {
+            append txtBodyTable "<td>$item</td>\n"    
+        }
+        
+    }
+    return $txtBodyTable
+}
 
 proc ::data::render {tmpl  html_out} {
     set fileid_html [open $html_out w]
@@ -30,9 +50,9 @@ proc ::data::render {tmpl  html_out} {
             #<?tcl ::data::tableCreater stat ?>
             if {![::data::isEmptyString $before]} {
                 puts $fileid_html  $before
+                set cntchars [string legth $before]
             }
-            #unset -nocomplain procedureName args txt
-            set txt "eval $code"
+            set txt [eval $code] 
             puts $fileid_html $txt
             if {![::data::isEmptyString $aftercode]} {
                 puts $fileid_html  $aftercode
