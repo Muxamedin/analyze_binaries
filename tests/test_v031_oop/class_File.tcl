@@ -15,13 +15,15 @@
 	}
 	method ConvertSize {} {
 		set file_size $FileSize
-		if { ! [ expr $file_size < 1024 ]} {
+		if {![expr $file_size < 1024]} {
 			#puts $FileSize
-				if { [expr $file_size < 1048576 ]} {
-					set file_size "[expr $file_size / 1024 ].[expr $file_size % 1024] Kb"
+				if {[expr $file_size < 1048576 ]} {
+					set file_size \
+					"[expr $file_size / 1024 ].[expr $file_size % 1024] Kb"
 				} else {
 					#set file_size_conv [expr $file_size / 1024000]
-					set file_size "[expr $file_size / 1048576 ].[expr $file_size % 1048576 ] Mb"
+					set file_size \
+					"[expr $file_size / 1048576 ].[expr $file_size % 1048576] Mb"
 				}		
 		}
 		set FileSize_conv  $file_size

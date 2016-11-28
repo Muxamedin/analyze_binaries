@@ -1,11 +1,12 @@
 <html>
 <head>
-    <title><?tcl ::info::title ?></title>
+    <title>File analyze REPORT</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<h1><?tcl ::info::caption ?></h1>
-
+	<h1>
+		<?tcl ::data::caption ?>
+	</h1>
 <main>
   <input id="tab1" type="radio" name="tabs" checked>
   <label for="tab1">Summary</label>
@@ -21,53 +22,203 @@
   <label for="tab6">All files</label>
   <section id="content1">
     <p>
-		text description:
-		<?tcl tcl ::info::render description ?>
+		<H3>Summary after analyze</H3>
     </p>
     <p>
-        <?tcl ::info::render summary args?>
+		<table class="features-table">
+			<thead>
+				<tr>
+					<td class=grey>N</td>
+					<td class=grey>32 bit file</td>
+					<td class=grey>library</td>
+					<td class=grey>binary</td>
+					<td class=grey>folder</td>
+					<td class=grey>group of app</td>
+					<td class=grey>tools </td>
+					<td class=grey>build dir</td>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<td class=grey>N</td>
+					<td class=grey>32 bit file</td>
+					<td class=grey>library</td>
+					<td class=grey>binary</td>
+					<td class=grey>folder</td>
+					<td class=grey>group of app</td>
+					<td class=grey>tools </td>
+					<td class=grey>build dir</td>
+				</tr>
+			</tfoot>
+			<tbody>
+				<?tcl ::data::tableCreater summary 7 ?>
+			</tbody>
+		</table>
+        
     </p>
   </section>
   <section id="content2">
+	<p>
+	   <H3>Table of binaries in folder.</H3>
+    </p>
     <p>
-        <?tcl ::info::render binaries args?>
+		<table class="features-table">
+			<thead>
+				<tr>
+					<td class=grey>N</td>
+					<td class=grey>file name</td>
+					<td class=grey>size</td>
+					<td class=grey>bitness</td>
+					<td class=grey>folder</td>
+					<td class=grey>depends from library</td>
+					
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<td class=grey>N</td>
+					<td class=grey>file name</td>
+					<td class=grey>size</td>
+					<td class=grey>bitness</td>
+					<td class=grey>folder</td>
+					<td class=grey>depends from lirary</td>
+				</tr>
+			</tfoot>
+			<tbody>
+				<?tcl ::data::tableCreater binaries 5 ?>
+			</tbody>
+		</table>	
     </p>
   </section>
     
   <section id="content3">
     <p>
-	   <?tcl tcl ::info::render libraries_description ?>
+	   <H3>Table of shared files in folder</H3>
     </p>
     <p>
-       <?tcl ::info::render libraries args?>
+		<table class="features-table">
+			<thead>
+				<tr>
+					<td class=grey>N</td>
+					<td class=grey>shared files</td>
+					<td class=grey>size</td>
+					<td class=grey>bitness</td>
+					<td class=grey>folder</td>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<td class=grey>N</td>
+					<td class=grey>shared files</td>
+					<td class=grey>size</td>
+					<td class=grey>bitness</td>
+					<td class=grey>folder</td>
+				</tr>
+			</tfoot>
+			<tbody>
+				<?tcl ::data::tableCreater libraries 4 ?>
+			</tbody>
+		</table>
     </p>
   </section>
     
   <section id="content4">
     <p>
-      <?tcl tcl ::info::render dependencies_description ?>
+      <H3>Table of all libraries which are dependencies for binary files</H3>
     </p>
     <p>
-      <?tcl tcl ::info::render dependencies args ?>
+		<table class="features-table">
+			<thead>
+				<tr>
+					<td class=grey>N</td>
+					<td class=grey>shared file</td>
+					<td class=grey>size</td>
+					<td class=grey>bitness</td>
+					<td class=grey>exists in tools</td>
+					<td class=grey>exists in build folder</td>
+					<td class=grey>some auto explanation</td>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<td class=grey>N</td>
+					<td class=grey>shared file</td>
+					<td class=grey>size</td>
+					<td class=grey>bitness</td>
+					<td class=grey>exists in tools</td>
+					<td class=grey>exists in build folder</td>
+					<td class=grey>some auto explanation</td>
+				</tr>
+			</tfoot>
+			<tbody>	
+				<?tcl ::data::tableCreater dependencies 6 ?>
+			</tbody>
+		</table>
     </p>
   </section>
   <section id="content5">
     <p>
-      <?tcl tcl ::info::render stat_description ?>
+      <H3>Statistic information about binary files in folder</H3>
     </p>
     <p>
-      <?tcl tcl ::info::render stat arg ?>
+		<table class="features-table">
+			<thead>
+				<tr>
+					<td class=grey>N</td>
+					<td class=grey>group</td>
+					<td class=grey>summary size</td>
+					<td class=grey>count of items</td>
+					<td class=grey>size in % (where 100% - total files size)</td>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<td class=grey>N</td>
+					<td class=grey>group</td>
+					<td class=grey>summary size</td>
+					<td class=grey>count of items</td>
+					<td class=grey>size in % (where 100% - total files size)</td>
+				</tr>
+			</tfoot>
+			<tbody>
+				<?tcl ::data::tableCreater stat 4 ?>
+			</tbody>
+		</table>
     </p>
   </section>
    <section id="content6">
     <p>
-      <?tcl tcl ::info::render all_description?>
+      <H3>Table of all binaries  and shared files <H3>
     </p>
     <p>
-      <?tcl tcl ::info::render all arg?>
+		<table class="features-table">
+			<thead>
+				<tr>
+					<td class=grey>N</td>
+					<td class=grey>file</td>
+					<td class=grey>folder</td>
+					<td class=grey>binary</td>
+					<td class=grey>library</td>
+					<td class=grey>size</td>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<td class=grey>N</td>
+					<td class=grey>file</td>
+					<td class=grey>folder</td>
+					<td class=grey>binary</td>
+					<td class=grey>library</td>
+					<td class=grey>size</td>
+				</tr>
+			</tfoot>
+			<tbody>
+				<?tcl ::data::tableCreater all 5 ?>
+			</tbody>
+		</table>	
     </p>
   </section> 
 </main>
-</body>>
+</body>
 </html>
 

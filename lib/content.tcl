@@ -1,6 +1,5 @@
 namespace eval ::data {}
 
-
 proc ::data::caption {} {
     set currentTime [clock format [clock seconds] -format "%dT%H:%M:%S"]
     set caption "File analyze REPORT generated from $currentTime"
@@ -13,7 +12,8 @@ proc ::data::isEmptyString {str} {
     expr {![binary scan $str c c]}
 }
 #for testing of rendering html 
-set libraries    [list Bububu 32b 64 D:/1  bu0 32b 64 D:/1 Coza 32b 64 D:/1 ]
+#set libraries    [list Bububu 32b 64 D:/1  bu0 32b 64 D:/1 Coza 32b 64 D:/1 ]
+set libraries    {}
 set dependencies [list lib 45Mb 32  yes no "blablabla" lib1 45Mb 32  yes no "blablabla"]
 set binaries     [list application 45Mb 32 "/tmp" "lob snob bob"]
 set stat         [list lib 12Mb 32  12 bin 12Mb 23  15 ]
@@ -40,10 +40,8 @@ proc ::data::tableCreater {lstName cntInTable} {
                 }
                 default {
                     append txtBodyTable "</tr> \n <tr> \n <td class=red>$cnt_rows</td> \n <td class=green>$item</td>\n"
-                    
                 }
             }
-            
         } else {
             append txtBodyTable "<td class=green >$item</td>\n"    
         }
@@ -78,5 +76,3 @@ proc ::data::render {tmpl  html_out} {
 ::data::render "D:/work_tcl/analize/analyze_binaries/html/view.tmpl"   "D:/work_tcl/analize/analyze_binaries/html/index.html"
 puts done
 exit
-#::data::title stdout
-::data::caption

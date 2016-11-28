@@ -214,7 +214,6 @@
 
 puts "Start"
 #NodesLinux create ContainerOfFiles "/tmp/test"
-#
 NodesLinux create ContainerOfFiles "/opt/ecloud"
 puts "[ContainerOfFiles get top]"
 puts "\#---files"
@@ -225,27 +224,27 @@ puts "\#---"
 puts "\#---lib32"
 puts "[llength [ContainerOfFiles get libLst32]]"
 puts "\#---"
-puts "\#---lib64"
+puts "\#---lib64---------------------------------------------------------------"
 set libLst64 [ContainerOfFiles get libLst64]
 puts "[llength $libLst64]"
 puts "\#---"
-puts "\#---exe64"
+puts "\#---exe64---------------------------------------------------------------"
 puts "[llength [ContainerOfFiles get exeLst64]]"
 puts "\#---"
 puts "\#---exe32"
 set exeLst32 [ContainerOfFiles get exeLst32]
 puts "[llength $exeLst32]"
 puts "\#---"
-puts "\#--- lib64"
+puts "\#--- lib64--------------------------------------------------------------"
 foreach i $libLst64 {
     puts "[incr cnt]: [$i get_fileFolder] | [$i get_fileOnlyName] | [$i getFileSize]"
 }
-puts "\#---"
+puts "\#-----------------------------------------------------------------------"
 puts "\#---links"
 set linkLst [ContainerOfFiles get linkLst]
-puts "lenght \n [llength $linkLst]"
+puts "count: [llength $linkLst]"
 foreach ii $linkLst {
     puts "[incr cntl]: [$ii get_fileFolder] | [$ii get_fileOnlyName] | [$ii get_pointTo]"
 }
-puts "\#---"
+puts "\#-----------------------------------------------------------------------"
 puts "End"

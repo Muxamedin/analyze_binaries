@@ -1,7 +1,7 @@
 # Copyright (C) Electric Cloud 2016 
 # Author  :  Mike Bily
 # Using oop module - TcLOO
-#---------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 package require  TclOO
 # INTERFACE Igetsetter
 # implantation getter and setter methods (interface) for public variables
@@ -22,7 +22,7 @@ package require  TclOO
         }
     }
 }
-#---------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 # CLASS File - for Items which should store information about file
 ::oo::class create File {
 	#private
@@ -83,7 +83,7 @@ package require  TclOO
 		return $fileFolder
 	}
 }
-#---------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 ::oo::class create FileLink {
     superclass File
     variable pointTo
@@ -101,7 +101,7 @@ package require  TclOO
         return $pointTo
     }
 }
-#---------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 ::oo::class create Nodes {
 	variable top
 	variable filesLst
@@ -148,23 +148,26 @@ package require  TclOO
 	#@ ABSTRACT METHOD
 	method checkBinariesOnBitness {file_name} { #empty body }
 }
-#---------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 ::oo::class create NodesLinux {
 	superclass Nodes Igetsetter
     variable linkLst
 	constructor {Top} {
         next $Top
-   		my variable exeLst32 exeLst64 libLst32  libLst64 foldersLst filesLst linkLst
-        foreach var [list exeLst32 exeLst64 libLst32  libLst64 foldersLst filesLst linkLst] {
+   		my variable exeLst32 exeLst64 libLst32  libLst64 foldersLst filesLst \
+        linkLst
+        foreach var [list exeLst32 exeLst64  libLst32  libLst64 foldersLst \
+                     filesLst linkLst] \
+        {
             set $var {}
         }
     }
-    
     method CreateListsFilesAndFolders {} {
-		my variable top exeLst32 exeLst64 libLst32  libLst64 foldersLst filesLst linkLst
+		my variable top exeLst32 exeLst64 libLst32 libLst64 foldersLst \
+        filesLst linkLst
         lappend folders $top
         set linkLst {}
-		set     index   0 
+		set index   0 
 		while {$index < [llength $folders]} {
 			set  current_item [lindex $folders $index]
 			incr index
@@ -177,7 +180,7 @@ package require  TclOO
 					lappend files $full_path
 					set binnaryFile [my checkBinariesOnBitness $full_path]
 					lassign $binnaryFile bit type
-					if { $bit > 0 } {
+					if {$bit > 0} {
 						if { $type == "exe" } {
 							lappend exeLst$bit [File new $full_path]
 						} elseif {$type == "lib"} {
@@ -189,7 +192,7 @@ package require  TclOO
 				}
 			}
        	}
-        if {![info exists files] } {lappend files {}}
+        if {![info exists files]} {lappend files {}}
 		set foldersLst $folders
 		set filesLst   $files
 	}
@@ -217,8 +220,7 @@ package require  TclOO
 		return [list $bit $binaryType]
 	}
 }
-
-#---------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 ::oo::class create NodesWindows {
 	superclass Nodes
 	variable another
@@ -253,6 +255,7 @@ package require  TclOO
 					set bit "64"
 	    		}
 				set ext  [file extension $file_name]
+                #TODO : test it - not tested
 				switch $ext {
 					dll|DLL {
 						set binaryType "dll" 
@@ -276,28 +279,18 @@ package require  TclOO
 	}
 
 }
-#---------------------------------------------------------------------------
-
-WFile create  fileItem "D:/1/port.tcl"
-puts  [fileItem  getFilename]
-puts  "fileItem  getFilename"
-fileItem  setFileName "D:/2"
-fileItem
-
-puts  [fileItem  getFileSize]
-Nodes create filesInFolder "D:/1"
-puts "done"
-filesInFolder test_data
+#-------------------------------------------------------------------------------
 exit
-##---------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 proc get_arguments {} {
 	global argv argc
 	if {$argc > 0 } {
 		set file_name [lindex $argv 0]
-		if { [file exists $file_name ] &&  [ file isdirectory $file_name ]} {
+		if {[file exists $file_name ] && [ file isdirectory $file_name]} {
 			set path $file_name
 		} else { 
-			puts "Can't access to file  $file_name - please check commandline first option" 
+			puts "Can't access to file  $file_name - please check commandline \
+first option" 
 			exit 
 		}		
 	} else { 
@@ -305,5 +298,4 @@ proc get_arguments {} {
 	}
 	return $path  
 }
-
-##---------------------------------------------------------------------------
+#-------------------------------------------------------------------------------

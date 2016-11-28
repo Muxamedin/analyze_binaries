@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Komodo Project File - DO NOT EDIT -->
 <project id="d84a986b-e26a-4d9c-87f3-a54c7698d9e0" kpf_version="5" name="analyze_binaries.komodoproject">
+<file id="3ba20bf3-ea28-4b1e-981b-47ddfc472732" idref="d84a986b-e26a-4d9c-87f3-a54c7698d9e0" name="analyze.tcl" url="analyze.tcl">
+</file>
+<file id="7a9a1869-0bdf-4b9e-bf3a-c312e25d0eb1" idref="d84a986b-e26a-4d9c-87f3-a54c7698d9e0" name="index.html" url="html/index.html">
+</file>
+<livefolder id="94ba678a-3f81-4144-a3e3-69329beb28a8" idref="d84a986b-e26a-4d9c-87f3-a54c7698d9e0" name="0.3.1" url="0.3.1">
+</livefolder>
+<livefolder id="af655baf-41e9-48fb-9c22-c11b2a506695" idref="d84a986b-e26a-4d9c-87f3-a54c7698d9e0" name="tests" url="tests">
+</livefolder>
 <preference-set idref="d84a986b-e26a-4d9c-87f3-a54c7698d9e0" id="project" preftype="project">
+  <boolean id="editUseEdge">1</boolean>
+  <long id="editWrapType">1</long>
+  <boolean id="encodingHTML">1</boolean>
+  <long id="prefs_version">1</long>
 </preference-set>
 </project>
